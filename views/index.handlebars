@@ -1,0 +1,87 @@
+<!-- -->
+<!-- wrapper -->
+<div class="container text-center">
+	<!-- row 1 - entree IMAGE -->
+	<div class="row">
+		<!-- column -->
+		<div class="col-md-12 text-center">
+			<!-- image -->
+		  	<img src="/assets/img/ramen3.jpg" class="img-circle">
+		<!-- end column -->
+		</div>
+	<!-- end row 1 -->
+  	</div>
+
+	<!-- row 2 - EAT-DA-entree HEADING -->
+	<div class="row">
+		<!-- column -->
+		<div class="col-md-12 text-center">
+			<!-- heading -->
+		  	<h1>The Sunshine Cafe - Fine Asian Cuisine</h1>
+		<!-- end column -->
+		</div>
+	<!-- end row 2 -->
+  	</div>
+	<!-- row 3 - entree SHOW HERE -->
+	<div class="row">
+		<!-- column 1 - TASTY entreeS -->
+		<div class="col-md-6 text-center">
+			<h2>Mmmmmm!</h2>
+			<ol>
+				{{#each entrees}}
+					{{#unless this.devoured}}		
+							<h3>
+							  <form action="entrees/update/{{this.id}}?_method=PUT" method="POST">
+								<input type="hidden" name="devoured" value="true">
+									<button type="submit" class="btn btn-primary">
+									{{this.id}} - {{this.entree_name}} - Devour it!
+									</button>
+								</form>
+							</h3>
+					{{/unless}}
+				{{/each}}
+			</ol>				
+		<!-- end column 1 -->
+		</div>				
+		<!-- column 2  -->
+		<div class="col-md-6 text-center">
+			<h2>Devoured entrees!</h2>
+			<ol>
+				{{#each entrees}}
+					{{#if this.devoured}}
+							<h3>
+					        {{entrees/delete-entree}}
+								<form action="entrees/delete/{{this.id}}?_method=DELETE" method="POST"> 
+									<input type="hidden" name="digested" value="true">
+									<button type="submit" class="btn btn-primary">							
+									{{this.id}} - {{this.entree_name}} - Yum!
+									</button>
+								</form>
+							</h3>
+					{{/if}}
+				{{/each}}
+			</ol>
+		<!-- end column 2 -->
+		</div>	
+		
+	<!-- end row 3 -->
+  	</div>
+
+	<!-- row 4 - USER TEXTBOX & SUBMIT BUTTON -->
+	<div class="row">
+		<!-- column -->
+		<div class="col-md-12 text-center">
+			<h1>Add an entree</h1>
+			<form class="create-update-form" action="entrees/create" method="POST">
+				<div class="form-group">
+					<label for="entree"></label>
+					<input type="text" id="entree" name="name">
+				</div>
+				<button type="submit" class="btn btn-primary">Add</button>
+			</form>
+		<!-- end column -->
+		</div>
+	<!-- end row 4 -->
+  	</div>
+<!-- end wrapper -->
+</div>
